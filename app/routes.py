@@ -8,10 +8,13 @@ def get_emotion_handler():
     data = request.get_json()
     text = data.get('text', '')
     if(text == ''):
-        return jsonify({'message': 'No text provided'}), 400
+        return jsonify({'message': 'No text provided', 
+                        'emotion': None, 
+                        'success': False }), 400
     
     emotion = emotion_analyzer(text)
     return jsonify({
         'emotion': emotion, 
-        'message': 'Emotion calculated successfully'
+        'message': 'Emotion calculated successfully',
+        'success': True
         }), 200
