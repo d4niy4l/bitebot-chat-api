@@ -2,5 +2,4 @@ transformers
 Flask[async]
 xformers
 python-dotenv
-requests
 google.generativeai

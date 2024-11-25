@@ -36,8 +36,7 @@ def get_nutrients_handler():
         product_ids = json.loads(clean_response)  # Convert to Python list
         print("Matching Product IDs:", product_ids)
     except json.JSONDecodeError as e:
-        print("Failed to decode response:", raw_response)
-        print("Error:", e)
+        return jsonify({"matching_product_ids": [], "success": False, "message": "Error parsing model response"})
 
    
 
