@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.emotion_analyzer import emotion_analyzer
+from app.emotion_analyzer.emotion_analyzer import emotion_analyzer
 
 get_emotion = Blueprint('get_emotion', __name__)
 
