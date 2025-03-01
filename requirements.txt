@@ -1,5 +1,7 @@
-transformers
-Flask[async]
-xformers
+fastapi
+langchain-groq
+uvicorn
+aiohttp
+pinecone
 python-dotenv
-google.generativeai
+transformers

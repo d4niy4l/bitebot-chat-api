@@ -1,4 +1,3 @@
-from app import create_app
+from fastapi import FastAPI
 
-app = create_app()
-app.run(debug=True)
+app = FastAPI()
