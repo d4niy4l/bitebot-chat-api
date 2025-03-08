@@ -4,6 +4,7 @@ import re
 import json
 
 from app.llms.llms import deepseek, llma_instant, mistral
+from app.llms.guardrail import guardrail
 from app.utils.classify_query import classify_query
 from app.prompts.prompts import complex_query_refinement_prompt, simple_query_refinement_prompt, rerank_query_prompt
 from app.pinecone.pinecone_client import get_pinecone_client
@@ -22,7 +23,10 @@ def clean_llm_output(text: str) -> str:
 @router.post("/search")
 async def search(body:SearchBody):
     try:
+
         query = body.query
+        if not guardrail(query):
+            return {"message": "Request rejected due to guardrail breach"}, 403           
         query_type = classify_query(query)
         response = None
         if query_type == "simple":

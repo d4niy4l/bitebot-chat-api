@@ -18,3 +18,9 @@ mistral = ChatGroq(
     model="mistral-saba-24b",
     api_key=GROQ_API_KEY
 )
+
+gemma = ChatGroq(   
+    temperature=0,
+    model="gemma2-9b-it",
+    api_key=GROQ_API_KEY
+)

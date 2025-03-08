@@ -126,3 +126,14 @@ For example, if the best matches are items with IDs 1, 3, and 2 and 2 is not mat
 [1, 3]
 """
 )
+
+guardrail_prompt = PromptTemplate.from_template(
+    """
+    You are a content guard. Your task is to check if the following user query meets safety and formatting guidelines.
+    The query should also be about food, nutrition, or health-related topics. 
+    If the query is acceptable, output the query exactly as is. 
+    If it contains unsafe or off-topic content, return only "REJECT" and no explaination, else return "ACCEPT"
+    
+    User Query: "{user_query}"
+    """
+)
