@@ -4,4 +4,6 @@ uvicorn
 aiohttp
 pinecone
 python-dotenv
-transformers
+httpx
+mistralai
+langchain-mistralai
