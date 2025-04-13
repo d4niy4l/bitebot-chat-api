@@ -6,7 +6,8 @@ def flatten_item_data(item):
         "item_id": item["item_id"],
         "name": item["name"],
         "ingredients": ", ".join(item["ingredients"]),
-        "nutrient_description": item["nutrient_description"]
+        "nutrient_description": item["nutrient_description"],
+        "description": item["description"],   
     }
     
     for key, value in item["nutrients"].items():
