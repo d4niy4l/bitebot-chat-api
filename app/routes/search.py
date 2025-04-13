@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import re
 import json
@@ -25,6 +26,7 @@ async def search(body:SearchBody):
     try:
 
         query = body.query
+        print("User query:", query)
         if not guardrail(query):
             return {"message": "Request rejected due to guardrail breach"}, 403           
         query_type = classify_query(query)
@@ -49,6 +51,7 @@ async def search(body:SearchBody):
         search_results = index.query(vector=embed_query, top_k=10, include_metadata=True)
         matches = search_results["matches"]
 
+        print("Matches found:", len(matches))
         results = []
 
         for match in matches:
@@ -70,9 +73,12 @@ async def search(body:SearchBody):
         reranked_response = mistral.invoke(reranking_prompt)
         cleaned = re.sub(r"```json|```", "", reranked_response.content).strip()
         item_id_list = json.loads(cleaned)
+        print("Item has been added.")
+        print(reranking_prompt)
+        print("Reranked response:", item_id_list)
         return {"message": "Search successful", "data": item_id_list}
     except Exception as e:
-        return {"message": str(e)}, 500
+        return JSONResponse(content={"message": str(e)}, status_code=500)
 
     
     
