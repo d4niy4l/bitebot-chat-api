@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import asyncio
 
@@ -53,4 +54,4 @@ async def add_item(body:AddItemBody):
 
         return {"message": "Item has been added", "data": response}
     except Exception as e:
-        return {"message": str(e)}, 500
+        return JSONResponse(content={"message": str(e)}, status_code=500)
